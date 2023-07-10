@@ -3,14 +3,15 @@
 const cmdLine = process.argv.slice(2);
 
 if (cmdLine.length === 0) {
-  return;
+  process.exit(); //terminates the program
 }
-else {
-  for (let secs of cmdLine) {
-    if (secs > 0 && typeof (secs) === "number") {
-      setTimeout(() => {
-        process.stdout.write('\x07');
-      }, secs);
-    }
-  }
-};
+
+for (let secs of cmdLine) {
+  const timer = Number(secs) * 1000; //convert seconds to milliseconds
+
+  if (timer > 0 && typeof timer === "number") {
+    setTimeout(() => {
+      process.stdout.write('\x07');
+    }, timer);
+  } 
+}
